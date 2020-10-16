@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>계산기</title>
+  </head>
+
+  <style>
+    .container {
+  text-align: center;
+  background: lightskyblue;
+  width: 270px;
+  margin: auto;
+  margin-top: 200px;
+  }
+  
+  .title {
+  margin-bottom: 1px;
+  text-align: center;
+  width: 266px;
+  color: black;
+  background: white;
+  border: solid black 2px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  }
+  
+  input[type="button"] {
+  background-color: lightskyblue;
+  color: white;
+  border: solid lightskyblue 20px;
+  width: 100%;
+  }
+  
+  input[type="button"]:hover {
+  background-color: lightskyblue;
+  color: black;
+  }
+  
+  input[type="text"] {
+  background-color: white;
+  border: solid black 1px;
+  width: 93%;
+  }
+
+  </style>
+  <body>
+    <div class="container">
+      <div class="title">계산기</div>
+      <table border="1">
+        <tr>
+          <td colspan="3"><input readonly type="text" id="resultinput" /></td>
+          <td><input type="button" value="C" onclick="reset()" /></td>
+        </tr>
+        <tr>
+          <td><input type="button" value="1" onclick="pushButton('1')" /></td>
+          <td><input type="button" value="2" onclick="pushButton('2')" /></td>
+          <td><input type="button" value="3" onclick="pushButton('3')" /></td>
+          <td><input type="button" value="/" onclick="pushButton('/')" /></td>
+        </tr>
+        <tr>
+          <td><input type="button" value="4" onclick="pushButton('4')" /></td>
+          <td><input type="button" value="5" onclick="pushButton('5')" /></td>
+          <td><input type="button" value="6" onclick="pushButton('6')" /></td>
+          <td><input type="button" value="-" onclick="pushButton('-')" /></td>
+        </tr>
+        <tr>
+          <td><input type="button" value="7" onclick="pushButton('7')" /></td>
+          <td><input type="button" value="8" onclick="pushButton('8')" /></td>
+          <td><input type="button" value="9" onclick="pushButton('9')" /></td>
+          <td><input type="button" value="+" onclick="pushButton('+')" /></td>
+        </tr>
+        <tr>
+          <td><input type="button" value="." onclick="pushButton('.')"/></td>
+          <td><input type="button" value="0" onclick="pushButton('0')" /></td>
+          <td><input type="button" value="=" onclick="solve()" /></td>
+          <td><input type="button" value="*" onclick="pushButton('*')" /></td>
+        </tr>
+      </table>
+    </div>
+    
+    <script>
+      // 계산용 객체
+let object = {
+  currentNumber: '',
+  numbers: [],
+  operators: []
+};
+
+// 버튼
+function pushButton(char) {
+  const resultinput = document.getElementById("resultinput");
+  resultinput.value = resultinput.value + char;
+
+  if (char == "+") {
+    object.operators.push(char);
+    object.numbers.push(Number(object.currentNumber));
+    object.currentNumber = "";
+  } else if (char == "-") {
+    object.operators.push(char);
+    object.numbers.push(Number(object.currentNumber));
+    object.currentNumber = "";
+  } else if (char == "*") {
+    object.operators.push(char);
+    object.numbers.push(Number(object.currentNumber));
+    object.currentNumber = "";
+  } else if (char == "/") {
+    object.operators.push(char);
+    object.numbers.push(Number(object.currentNumber));
+    object.currentNumber = "";
+  } else {
+    object.currentNumber += char;
+  }
+}
+
+// 리셋
+function reset() {
+  const resultinput = document.getElementById("resultinput");
+
+  resultinput.value = "";
+  object = {
+    currentNumber: '',
+    numbers: [],
+    operators: []
+  };
+}
+
+// 계산
+function solve() {
+  const resultinput = document.getElementById("resultinput");
+
+  resultinput.value = eval(resultinput.value);
+  object = {
+    currentNumber: '',
+    numbers: [],
+    operators: []
+  };
+}
+
+// 덧셈
+function add(a, b) {
+  return Number(a) + Number(b);
+}
+
+// 뺄셈
+function subtract(a, b) {
+  return Number(a) - Number(b);
+}
+
+// 곱셈
+function multiply(a, b) {
+  return Number(a) * Number(b);
+}
+
+// 나눗셈
+function divide(a, b) {
+  if (b == 0) {
+    return "ERROR";
+  } else {
+    return Number(a) / Number(b);
+  }
+}
+    </script>
+  </body>
+</html>
